@@ -10,8 +10,10 @@ import { store } from "./redux/store";
 const root = document.getElementById("root");
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Chat />
-  </Provider>,
+  <React.StrictMode>
+    <Provider store={store}>
+      <Chat />
+    </Provider>
+  </React.StrictMode>,
   root
 );

@@ -19,11 +19,11 @@ export const SendMessage = () => {
   }, [messages]);
 
   const addMessage = useCallback(
-    (text, date) =>
+    (text, time) =>
       dispatch(
         sendMessage({
           text: text,
-          time: `${date.getHours()}:${date.getMinutes()}`,
+          time: `${time.hours}:${time.minutes}`,
         })
       ),
     [dispatch]
@@ -31,13 +31,31 @@ export const SendMessage = () => {
 
   const handleChange = (e) => {
     setText(e.target.value);
+    setDate(new Date());
   };
 
   const handleClick = (e) => {
     e.preventDefault();
-    setDate(new Date());
     if (text !== "") {
-      addMessage(text, date);
+      const zero = "0";
+      const time = {
+        hours: date.getHours(),
+        minutes: date.getMinutes(),
+      };
+      if (date.getHours() < 10 && date.getMinutes() < 10) {
+        time.hours = zero + date.getHours();
+        time.minutes = zero + date.getMinutes();
+        return addMessage(text, time);
+      }
+      if (date.getHours() < 10) {
+        time.hours = zero + date.getHours();
+        return addMessage(text, time);
+      }
+      if (date.getMinutes() < 10) {
+        time.minutes = zero + date.getMinutes();
+        return addMessage(text, time);
+      }
+      addMessage(text, time);
     }
     setText("");
   };
