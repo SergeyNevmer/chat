@@ -45,15 +45,18 @@ export const SendMessage = () => {
       if (date.getHours() < 10 && date.getMinutes() < 10) {
         time.hours = zero + date.getHours();
         time.minutes = zero + date.getMinutes();
-        return addMessage(text, time);
+        addMessage(text, time);
+        return setText("");
       }
       if (date.getHours() < 10) {
         time.hours = zero + date.getHours();
-        return addMessage(text, time);
+        addMessage(text, time);
+        return setText("");
       }
       if (date.getMinutes() < 10) {
         time.minutes = zero + date.getMinutes();
-        return addMessage(text, time);
+        addMessage(text, time);
+        return setText("");
       }
       addMessage(text, time);
     }
